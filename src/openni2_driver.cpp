@@ -59,7 +59,7 @@ OpenNI2Driver::OpenNI2Driver(boost::shared_ptr<lcm::LCM>& lcm, const CommandLine
     last_color_image_init_(false)
 {
 
-  image_buf_size_ = 640 * 480 * 100;
+  image_buf_size_ = 640 * 480 * 10;
   if (0 != posix_memalign((void**) &image_buf_, 16, image_buf_size_)) {
       fprintf(stderr, "Error allocating image buffer\n");
       //return 1;
@@ -239,7 +239,7 @@ lookupVideoModeFromDynConfig(5, depth_video_mode_);
  // auto_white_balance_ = config.auto_white_balance;
 
   auto_exposure_ = true;
-  auto_white_balance_ = true;
+  //auto_white_balance_ = true;
 
 //  use_device_time_ = config.use_device_time;
 
