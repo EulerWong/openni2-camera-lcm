@@ -59,7 +59,7 @@ OpenNI2Driver::OpenNI2Driver(boost::shared_ptr<lcm::LCM>& lcm, const CommandLine
     last_color_image_init_(false)
 {
 
-  image_buf_size_ = 640 * 480 * 10;
+  image_buf_size_ = 640 * 480 * 100;
   if (0 != posix_memalign((void**) &image_buf_, 16, image_buf_size_)) {
       fprintf(stderr, "Error allocating image buffer\n");
       //return 1;
