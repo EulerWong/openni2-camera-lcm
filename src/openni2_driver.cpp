@@ -751,7 +751,7 @@ std::string OpenNI2Driver::resolveDeviceURI(const std::string& device_id) throw(
   {
       std::string s = (*available_device_URIs)[i];
       printf(s);
-      print("\n")
+      printf("\n")
   }
   
 
