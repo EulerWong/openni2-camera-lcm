@@ -747,6 +747,14 @@ std::string OpenNI2Driver::resolveDeviceURI(const std::string& device_id) throw(
   boost::shared_ptr<std::vector<std::string> > available_device_URIs =
     device_manager_->getConnectedDeviceURIs();
 
+  for (size_t i = 0; i < available_device_URIs->size(); i++)
+  {
+      std::string s = (*available_device_URIs)[i];
+      printf(s);
+      print("\n")
+  }
+  
+
   // look for '#<number>' format
   if (device_id.size() > 1 && device_id[0] == '#')
   {
@@ -757,7 +765,7 @@ std::string OpenNI2Driver::resolveDeviceURI(const std::string& device_id) throw(
     if (device_index >= available_device_URIs->size() || device_index < 0)
     {
       THROW_OPENNI_EXCEPTION(
-          "*********************Invalid device number %i, there are %zu devices connected.",
+          "\nInvalid device number %i, there are %zu devices connected.\n",
           device_number, available_device_URIs->size());
     }
     else
