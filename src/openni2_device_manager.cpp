@@ -71,7 +71,7 @@ public:
     openni::OpenNI::addDeviceDisconnectedListener(this);
     openni::OpenNI::addDeviceStateChangedListener(this);
 
-    printf("OpenNI2DeviceListener() Constructor\n")
+    printf("OpenNI2DeviceListener() Constructor\n");
 
     // get list of currently connected devices
     openni::Array<openni::DeviceInfo> device_info_list;
@@ -189,9 +189,15 @@ boost::shared_ptr<OpenNI2DeviceManager> OpenNI2DeviceManager::singelton_;
 
 OpenNI2DeviceManager::OpenNI2DeviceManager()
 {
+  printf("Begin invoking OpenNI2DeviceManager::OpenNI2DeviceManager() Constructor\n");
   openni::Status rc = openni::OpenNI::initialize();
   if (rc != openni::STATUS_OK)
       THROW_OPENNI_EXCEPTION("Initialize failed\n%s\n", openni::OpenNI::getExtendedError());
+  else
+  {
+    printf("Initialize failed done, in OpenNI2DeviceManager::OpenNI2DeviceManager() Constructor\n");
+  }
+  
 
   device_listener_ = boost::make_shared<OpenNI2DeviceListener>();
 }
