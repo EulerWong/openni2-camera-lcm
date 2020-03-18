@@ -757,7 +757,7 @@ std::string OpenNI2Driver::resolveDeviceURI(const std::string& device_id) throw(
     if (device_index >= available_device_URIs->size() || device_index < 0)
     {
       THROW_OPENNI_EXCEPTION(
-          "Invalid device number %i, there are %zu devices connected.",
+          "*********************Invalid device number %i, there are %zu devices connected.",
           device_number, available_device_URIs->size());
     }
     else
