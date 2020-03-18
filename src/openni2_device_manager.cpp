@@ -90,6 +90,7 @@ public:
 
   virtual void onDeviceStateChanged(const openni::DeviceInfo* pInfo, openni::DeviceState state)
   {
+    printf("Device \"%s\" error state changed to %d\n", pInfo->getUri(), state);
 //    ROS_INFO("Device \"%s\" error state changed to %d\n", pInfo->getUri(), state);
 
     switch (state)
@@ -98,8 +99,11 @@ public:
         onDeviceConnected(pInfo);
         break;
       case openni::DEVICE_STATE_ERROR:
+        printf("DEVICE_STATE_ERROR\n");
       case openni::DEVICE_STATE_NOT_READY:
+        printf("DEVICE_STATE_NOT_READY\n");
       case openni::DEVICE_STATE_EOF:
+        printf("DEVICE_STATE_EOF\n");
       default:
         onDeviceDisconnected(pInfo);
         break;
