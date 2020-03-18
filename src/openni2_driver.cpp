@@ -765,7 +765,7 @@ std::string OpenNI2Driver::resolveDeviceURI(const std::string& device_id) throw(
     if (device_index >= available_device_URIs->size() || device_index < 0)
     {
       THROW_OPENNI_EXCEPTION(
-          "\nInvalid device number %i, there are %zu devices connected.\n",
+          "Invalid device number %i, there are %zu devices connected.",
           device_number, available_device_URIs->size());
     }
     else
@@ -872,7 +872,7 @@ void OpenNI2Driver::initDevice()
     {
       if (!device_)
       {
-        printf("No matching device found.... waiting for devices. Reason: %s", exception.what());
+        printf("No matching device found.... waiting for devices. ---> Reason: %s \n\n", exception.what());
         boost::this_thread::sleep(boost::posix_time::seconds(3));
         continue;
       }
