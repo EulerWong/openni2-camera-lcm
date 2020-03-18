@@ -68,7 +68,7 @@ OpenNI2Driver::OpenNI2Driver(boost::shared_ptr<lcm::LCM>& lcm, const CommandLine
   // allocate space for zlib compressing depth data
   depth_compress_buf_size_ = 640 * 480 * sizeof(int16_t) * 4;
   depth_compress_buf_ = (uint8_t*) malloc(depth_compress_buf_size_);
-
+  printf("OpenNI2Driver Constructor Invoked.\n");
 
   genVideoModeTableMap();
 
