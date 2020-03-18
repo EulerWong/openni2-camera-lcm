@@ -195,6 +195,7 @@ OpenNI2DeviceManager::OpenNI2DeviceManager()
       THROW_OPENNI_EXCEPTION("Initialize failed\n%s\n", openni::OpenNI::getExtendedError());
   else
   {
+    printf("Initialezed Status---> %d\n", (int)rc);
     printf("Initialize failed done, in OpenNI2DeviceManager::OpenNI2DeviceManager() Constructor\n");
   }
   
