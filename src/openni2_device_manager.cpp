@@ -108,6 +108,7 @@ public:
 
   virtual void onDeviceConnected(const openni::DeviceInfo* pInfo)
   {
+    printf("onDeviceConnected, Device \"%s\" found.\n", pInfo->getUri());
     boost::mutex::scoped_lock l(device_mutex_);
 
     const OpenNI2DeviceInfo device_info_wrapped = openni2_convert(pInfo);
@@ -122,6 +123,7 @@ public:
 
   virtual void onDeviceDisconnected(const openni::DeviceInfo* pInfo)
   {
+    printf("onDeviceDisconnected, Device \"%s\" disconnected\n", pInfo->getUri());
     boost::mutex::scoped_lock l(device_mutex_);
 
 //    ROS_WARN("Device \"%s\" disconnected\n", pInfo->getUri());
