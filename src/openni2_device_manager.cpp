@@ -71,6 +71,8 @@ public:
     openni::OpenNI::addDeviceDisconnectedListener(this);
     openni::OpenNI::addDeviceStateChangedListener(this);
 
+    printf("OpenNI2DeviceListener() Constructor\n")
+
     // get list of currently connected devices
     openni::Array<openni::DeviceInfo> device_info_list;
     openni::OpenNI::enumerateDevices(&device_info_list);
