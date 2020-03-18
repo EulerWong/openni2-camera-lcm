@@ -77,6 +77,7 @@ public:
     openni::Array<openni::DeviceInfo> device_info_list;
     openni::OpenNI::enumerateDevices(&device_info_list);
 
+    printf("Found devices info number: %d\n", device_info_list.getSize());
     for (int i = 0; i < device_info_list.getSize(); ++i)
     {
       onDeviceConnected(&device_info_list[i]);
@@ -196,7 +197,7 @@ OpenNI2DeviceManager::OpenNI2DeviceManager()
   else
   {
     printf("Initialezed Status---> %d\n", (int)rc);
-    printf("Initialize failed done, in OpenNI2DeviceManager::OpenNI2DeviceManager() Constructor\n");
+    printf("Initialized done, in OpenNI2DeviceManager::OpenNI2DeviceManager() Constructor\n");
   }
   
 
