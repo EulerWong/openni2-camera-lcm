@@ -80,7 +80,7 @@ public:
     printf("Found devices info number: %d\n", device_info_list.getSize());
 
 
-    openni::Version version = openni:OpenNI::getVersion();
+    openni::Version version = openni::OpenNI::getVersion();
     printf("version: %s\n", version);
     
     for (int i = 0; i < device_info_list.getSize(); ++i)
