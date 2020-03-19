@@ -81,7 +81,10 @@ public:
 
 
     openni::Version version = openni::OpenNI::getVersion();
-    printf("version: %s\n", version);
+    printf("version: %d\n", version.major);
+    printf("version: %d\n", version.minor);
+    printf("version: %d\n", version.maintenance);
+    printf("version: %d\n", version.build);
     
     for (int i = 0; i < device_info_list.getSize(); ++i)
     {
