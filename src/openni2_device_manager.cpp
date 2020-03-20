@@ -196,7 +196,7 @@ OpenNI2DeviceManager::OpenNI2DeviceManager()
   }
 
   openni::Device device;
-  status = device.open(openni::ANY_DEVICE);
+  openni::Status status = device.open(openni::ANY_DEVICE);
   if (status != openni::STATUS_OK) {
     printf(
         "Failed to open device:\n%s\n",
@@ -204,7 +204,7 @@ OpenNI2DeviceManager::OpenNI2DeviceManager()
     openni::OpenNI::shutdown();
   }else
   {
-    printf("Open device OK.\n")
+    printf("Open device OK.\n");
   }
   
 
