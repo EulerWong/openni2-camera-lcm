@@ -43,9 +43,6 @@
 
 #include "OpenNI.h"
 
-using namespace std;
-using namespace openni;
-
 namespace openni2_wrapper
 {
 
@@ -74,18 +71,10 @@ public:
     openni::OpenNI::addDeviceDisconnectedListener(this);
     openni::OpenNI::addDeviceStateChangedListener(this);
 
-    printf("OpenNI2DeviceListener() Constructor\n");
-
     // get list of currently connected devices
     openni::Array<openni::DeviceInfo> device_info_list;
     openni::OpenNI::enumerateDevices(&device_info_list);
 
-    printf("Found devices info number: %d\n", device_info_list.getSize());
-
-
-    openni::Version version = openni::OpenNI::getVersion();
-    printf("version: %d.%d.%d.%d\n", version.major, version.minor, version.maintenance, version.build);
-    
     for (int i = 0; i < device_info_list.getSize(); ++i)
     {
       onDeviceConnected(&device_info_list[i]);
@@ -101,7 +90,6 @@ public:
 
   virtual void onDeviceStateChanged(const openni::DeviceInfo* pInfo, openni::DeviceState state)
   {
-    printf("Device \"%s\" error state changed to %d\n", pInfo->getUri(), state);
 //    ROS_INFO("Device \"%s\" error state changed to %d\n", pInfo->getUri(), state);
 
     switch (state)
@@ -110,11 +98,8 @@ public:
         onDeviceConnected(pInfo);
         break;
       case openni::DEVICE_STATE_ERROR:
-        printf("DEVICE_STATE_ERROR\n");
       case openni::DEVICE_STATE_NOT_READY:
-        printf("DEVICE_STATE_NOT_READY\n");
       case openni::DEVICE_STATE_EOF:
-        printf("DEVICE_STATE_EOF\n");
       default:
         onDeviceDisconnected(pInfo);
         break;
@@ -123,7 +108,6 @@ public:
 
   virtual void onDeviceConnected(const openni::DeviceInfo* pInfo)
   {
-    printf("onDeviceConnected, Device \"%s\" found.\n", pInfo->getUri());
     boost::mutex::scoped_lock l(device_mutex_);
 
     const OpenNI2DeviceInfo device_info_wrapped = openni2_convert(pInfo);
@@ -138,7 +122,6 @@ public:
 
   virtual void onDeviceDisconnected(const openni::DeviceInfo* pInfo)
   {
-    printf("onDeviceDisconnected, Device \"%s\" disconnected\n", pInfo->getUri());
     boost::mutex::scoped_lock l(device_mutex_);
 
 //    ROS_WARN("Device \"%s\" disconnected\n", pInfo->getUri());
@@ -198,39 +181,9 @@ boost::shared_ptr<OpenNI2DeviceManager> OpenNI2DeviceManager::singelton_;
 
 OpenNI2DeviceManager::OpenNI2DeviceManager()
 {
-  printf("Begin invoking OpenNI2DeviceManager::OpenNI2DeviceManager() Constructor\n");
   openni::Status rc = openni::OpenNI::initialize();
   if (rc != openni::STATUS_OK)
       THROW_OPENNI_EXCEPTION("Initialize failed\n%s\n", openni::OpenNI::getExtendedError());
-  else
-  {
-    printf("Initialezed Status---> %d\n", (int)rc);
-    printf("Initialized done, in OpenNI2DeviceManager::OpenNI2DeviceManager() Constructor\n");
-  }
-
-    
-  openni::Status status;
-  status = openni::OpenNI::initialize();
-  if (status != openni::STATUS_OK) {
-    printf(
-        "*******Failed to initialize OpenNI:\n%s\n",
-        openni::OpenNI::getExtendedError());
-  }
-
-  openni::Device device;
-  status = device.open(openni::ANY_DEVICE);
-  if (status != openni::STATUS_OK) {
-    printf(
-        "Failed to open device:\n%s\n",
-        openni::OpenNI::getExtendedError());
-    openni::OpenNI::shutdown();
-  }else{
-      printf("OPEN OK^^^^^^^^^^^^^^^^^^^");
-     
-      }
-  }
-
-    
 
   device_listener_ = boost::make_shared<OpenNI2DeviceListener>();
 }
