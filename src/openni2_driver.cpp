@@ -77,8 +77,8 @@ OpenNI2Driver::OpenNI2Driver(boost::shared_ptr<lcm::LCM>& lcm, const CommandLine
   initDevice();
 
   // Initialize dynamic reconfigure
-//  reconfigure_server_.reset(new ReconfigureServer(pnh_));
-//  reconfigure_server_->setCallback(boost::bind(&OpenNI2Driver::configCb, this, _1, _2));
+  //reconfigure_server_.reset(new ReconfigureServer(pnh_));
+  //reconfigure_server_->setCallback(boost::bind(&OpenNI2Driver::configCb, this, _1, _2));
 
   configCb(1);
 
@@ -204,9 +204,9 @@ void OpenNI2Driver::configCb(uint32_t level)//Config &config, uint32_t level)
   //color_time_offset_ = 0;//ros::Duration(config.color_time_offset);
   //depth_time_offset_ = 0;//ros::Duration(config.depth_time_offset);
 
-   lookupVideoModeFromDynConfig(5, ir_video_mode_);
-lookupVideoModeFromDynConfig(5, color_video_mode_);
-lookupVideoModeFromDynConfig(5, depth_video_mode_);
+    lookupVideoModeFromDynConfig(5, ir_video_mode_);
+    lookupVideoModeFromDynConfig(5, color_video_mode_);
+    lookupVideoModeFromDynConfig(5, depth_video_mode_);
 
  // if (lookupVideoModeFromDynConfig(config.ir_mode, ir_video_mode_)<0)
  // {
@@ -750,8 +750,8 @@ std::string OpenNI2Driver::resolveDeviceURI(const std::string& device_id) throw(
   for (size_t i = 0; i < available_device_URIs->size(); i++)
   {
       std::string s = (*available_device_URIs)[i];
-      printf(s.c_str());
-      printf("\n");
+      //printf(s.c_str());
+      printf("\n\n--------\n\n");
   }
   
 
