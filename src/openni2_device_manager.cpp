@@ -226,11 +226,7 @@ OpenNI2DeviceManager::OpenNI2DeviceManager()
     openni::OpenNI::shutdown();
   }else{
       printf("OPEN OK^^^^^^^^^^^^^^^^^^^");
-      const openni::SensorInfo *sensorInfo = device.getSensorInfo(sensorType);
-      if (sensorInfo == NULL) {
-        printf("Failed to find sensor of appropriate type\n");
-        device.close();
-        openni::OpenNI::shutdown();
+     
       }
   }
 
