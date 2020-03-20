@@ -79,6 +79,12 @@ public:
     {
       onDeviceConnected(&device_info_list[i]);
     }
+
+
+    printf("OpenNI2DeviceListener() Constructor.....\n\n");
+
+
+
   }
 
   ~OpenNI2DeviceListener()
@@ -184,6 +190,25 @@ OpenNI2DeviceManager::OpenNI2DeviceManager()
   openni::Status rc = openni::OpenNI::initialize();
   if (rc != openni::STATUS_OK)
       THROW_OPENNI_EXCEPTION("Initialize failed\n%s\n", openni::OpenNI::getExtendedError());
+  else
+  {
+    printf("Initialized done \n\n");
+  }
+
+  openni::Device device;
+  status = device.open(openni::ANY_DEVICE);
+  if (status != openni::STATUS_OK) {
+    printf(
+        "Failed to open device:\n%s\n",
+        openni::OpenNI::getExtendedError());
+    openni::OpenNI::shutdown();
+  }else
+  {
+    printf("Open device OK.\n")
+  }
+  
+
+  
 
   device_listener_ = boost::make_shared<OpenNI2DeviceListener>();
 }
