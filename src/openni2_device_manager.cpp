@@ -43,6 +43,9 @@
 
 #include "OpenNI.h"
 
+using namespace std;
+using namespace openni;
+
 namespace openni2_wrapper
 {
 
@@ -81,10 +84,7 @@ public:
 
 
     openni::Version version = openni::OpenNI::getVersion();
-    printf("version: %d\n", version.major);
-    printf("version: %d\n", version.minor);
-    printf("version: %d\n", version.maintenance);
-    printf("version: %d\n", version.build);
+    printf("version: %d.%d.%d.%d\n", version.major, version.minor, version.maintenance, version.build);
     
     for (int i = 0; i < device_info_list.getSize(); ++i)
     {
@@ -207,7 +207,34 @@ OpenNI2DeviceManager::OpenNI2DeviceManager()
     printf("Initialezed Status---> %d\n", (int)rc);
     printf("Initialized done, in OpenNI2DeviceManager::OpenNI2DeviceManager() Constructor\n");
   }
-  
+
+    
+  openni::Status status;
+  status = openni::OpenNI::initialize();
+  if (status != openni::STATUS_OK) {
+    printf(
+        "*******Failed to initialize OpenNI:\n%s\n",
+        openni::OpenNI::getExtendedError());
+  }
+
+  openni::Device device;
+  status = device.open(openni::ANY_DEVICE);
+  if (status != openni::STATUS_OK) {
+    printf(
+        "Failed to open device:\n%s\n",
+        openni::OpenNI::getExtendedError());
+    openni::OpenNI::shutdown();
+  }else{
+      printf("OPEN OK^^^^^^^^^^^^^^^^^^^");
+      const openni::SensorInfo *sensorInfo = device.getSensorInfo(sensorType);
+      if (sensorInfo == NULL) {
+        printf("Failed to find sensor of appropriate type\n");
+        device.close();
+        openni::OpenNI::shutdown();
+      }
+  }
+
+    
 
   device_listener_ = boost::make_shared<OpenNI2DeviceListener>();
 }
